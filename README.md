@@ -23,7 +23,6 @@ jiang
 hangzhou dianzi university
 <br>
 qiao 
-fucking day
 </p>
 </body>
 </html>

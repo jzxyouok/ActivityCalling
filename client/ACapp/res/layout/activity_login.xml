@@ -1,19 +1,41 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     android:orientation="vertical">
-
+	<Button 
+	    android:id="@+id/btn_weiboLogin"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btn_weiboLogin"
+	    />
+		<Button 
+	    android:id="@+id/btn_weiboCancel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btn_weiboCancel"
+	    android:layout_toRightOf="@id/btn_weiboLogin"
+	    android:visibility="invisible"
+	    />
+		<Button 
+	    android:id="@+id/btn_qqLogin"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btn_qqLogin"
+	    android:layout_below="@id/btn_weiboLogin"
+	    />
+		<Button 
+	    android:id="@+id/btn_qqCancel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btn_qqCancel"
+	    android:layout_toRightOf="@id/btn_qqLogin"
+	    android:visibility="invisible"
+	    />
     <TextView
+        android:id="@+id/tv_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world"
-        tools:context=".LoginActivity" />
-	<Button 
-	    android:id="@+id/btn_login"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/btn_login"
-	    android:gravity="bottom"
-	    />
-</LinearLayout>
+        android:layout_below="@+id/btn_qqLogin"/>
+</RelativeLayout>

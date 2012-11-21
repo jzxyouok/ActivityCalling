@@ -104,6 +104,7 @@ public class ACLoginActivity extends Activity {
                 qqOAuth=(OAuthV2) data.getExtras().getSerializable("oauth");
                 if(qqOAuth.getStatus()==0)
                     Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_SHORT).show();
+                	loginSuccess();
             }
         }
     }
@@ -124,6 +125,7 @@ public class ACLoginActivity extends Activity {
 				btn_weiboCancel.setVisibility(View.VISIBLE);
 				AccessTokenKeeper.keepAccessToken(ACLoginActivity.this, accessToken);
 				Toast.makeText(ACLoginActivity.this, "认证成功", Toast.LENGTH_SHORT).show();
+				loginSuccess();
 			}
 		}
 		public void onError(WeiboDialogError e) {
@@ -137,5 +139,13 @@ public class ACLoginActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "Auth exception : " + e.getMessage(),
 					Toast.LENGTH_LONG).show();
 		}
+	}
+	/**
+	 * 登陆成功跳转
+	 */
+	private void loginSuccess(){
+		Intent intent = new Intent();
+		intent.setClass(getApplicationContext(), ACMainActivity.class);
+		startActivity(intent);
 	}
 }

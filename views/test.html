@@ -1,0 +1,133 @@
+<html>
+<head>
+</head>
+<body>
+<p>测试活动的发布</p>
+<form action="/publishActivity" method="post">
+<lable>actName</lable><input id="actName" name="actName" value="youah12jsadr" type="text"/>
+</br>
+<lable>actContent</lable><input id="actContent" name="actContent" value="就是这个活动" type="text"/>
+</br>
+<lable>actCategory</lable><input id="actCategory" name="actCategory" value="1" type="text"/>
+</br>
+<lable>actAddress</lable><input id="actAddress" name="actAddress" value="信雅达" type="text"/>
+</br>
+<lable>actLongitude</lable><input id="actLongitude" name="actLongitude" value="37.422006" type="text"/>
+</br>
+<lable>actLatitude</lable><input id="actLatitude" name="actLatitude" value="-122/084095" type="text"/>
+</br>
+<lable>actLimitNum</lable><input id="actLimitNum" name="actLimitNum" value="10" type="text"/>
+</br>
+<lable>actStart</lable><input id="actStart" name="actStart" value="Sun, 18 Nov 2012 06:49:29 GMT " type="text"/>
+</br>
+<lable>actEnd</lable><input id="actEnd" name="actEnd" value="Sun, 18 Nov 2012 08:49:29 GMT " type="text"/>
+</br>
+<lable>acUid</lable><input id="acUid" name="acUid" value="youah12jsadr" type="text"/>
+</br>
+<input type="submit" value="submit"/>
+</form>
+<hr/>
+<p>测试活动的加入</p>
+<form action="/joinActivity" method="post">
+<lable>actId</lable><input id="actId" name="actId" value="ACT135331519955485080" type="text"/>
+</br>
+<lable>acUid</lable><input id="acUid" name="acUid" value="you" type="text"/>
+</br>
+<input type="submit" value="submit"/>
+</form>
+<hr/>
+<p>测试根据类别号进行搜索</p>
+<form action="/getActivityOfCate" method="get">
+<lable>actAddress</lable><input id="actAddress" name="actAddress" value="信雅达" type="text"/>
+</br>
+<lable>actCategory</lable><input id="actCategory" name="actCategory" value="1" type="text"/>
+</br>
+<input type="submit" value="submit"/>
+</form>
+<hr/>
+<p>测试某个用户发布的活动</p>
+<form action="/getActivityOfPublish" method="get">
+<lable>acUid</lable><input id="acUid" name="acUid" value="you" type="text"/>
+</br>
+<input type="submit" value="submit"/>
+</form>
+<hr/>
+<p>测试取得某个用户参加的活动</p>
+<form action="/getActivityOfJoin" method="get">
+<lable>acUid</lable><input id="acUid" name="acUid" value="you" type="text"/>
+</br>
+<input type="submit" value="submit"/>
+</form>
+<hr/>
+<p>测试复杂搜索</p>
+<form action="/getSpecificActivity" method="get">
+<lable>actStartTime</lable><input id="actStartTime" name="actStartTime" value="Thu, 22 Nov 2012 06:49:29 GMT" type="text"/>
+</br>
+<lable>actStopTime</lable><input id="actStopTime" name="actStopTime" value="Thu, 22 Nov 2012 07:49:29 GMT" type="text"/>
+</br>
+<lable>actAddress</lable><input id="actAddress" name="actAddress" value="杭州" type="text"/>
+</br>
+<lable>actSearchAddress</lable><input id="actSearchAddress" name="actSearchAddress" value="信雅达" type="text"/>
+</br>
+<lable>ishot</lable><input id="ishot" name="ishot" value="1" type="text"/>
+</br>
+<input type="submit" value="submit"/>
+</form>
+<hr/>
+  提交意见测试
+      <form action = '/feedback' method = 'post'>
+        acUid：
+        <input type = 'text' name = 'acUid' id = 'acUid'>
+      </br>
+      content：
+        <input type = 'text' name = 'feedContent' id = 'feedContent'>
+      </br>
+        <input type = 'submit' >
+      </form>
+    </br></br>
+    反馈某个用户信息
+    提交 wb00002 用户
+          <form action = '/wb00002/getInfo' method = 'get'>
+      </br>
+        <input type = 'submit' >
+      </form>
+    </br></br>
+    用户对某个活动的提交的评论 测试
+          <form action = '/postComments' method = 'post'>
+            actId
+            <input type = 'text' name = 'actId' id = 'actId'></br>
+            acUid
+            <input type = 'text' name = 'acUid' id = 'acUid' ></br>
+            comments
+            <input type = 'text' name = 'comments' id = 'comments'></br>
+      </br>
+        <input type = 'submit' >
+      </form>
+          </br></br>
+    获取act123213活动的评论
+          <form action = '/act123213/getComments' method = 'get'>
+       </br>
+        <input type = 'submit' >
+      </form>
+ </br></br>
+    获取软件最新的版本号
+          <form action = '/getUpdate' method = 'get'>
+            <input type = 'text' name = 'currVersion' id = 'currVersion'>
+      </br>
+        <input type = 'submit' >
+      </form>
+
+
+                </br></br>
+    更新用户wb00002的联系方式
+          <form action = '/wb00002/updateInfo' method = 'post'>
+            改变的内容
+            <input type = 'text' name = 'content' id = 'content'  >
+          </br>
+          改变的联系方式
+            <input type = 'text' name = 'contact' id = 'contact' >
+      </br>
+        <input type = 'submit' >
+      </form>
+</body>
+</html>

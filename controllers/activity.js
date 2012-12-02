@@ -11,6 +11,7 @@ exports.publishActivity = function(req, res, next) {
   var actContent = req.body.actContent;
   var actCategory = req.body.actCategory; //int类型，1:运动 2：K歌 3：桌游 4、聚餐
   var actAddress = req.body.actAddress;
+  var actCity = req.body.actCity;   //增加字段：城市
   var actLongitude = req.body.actLongitude;
   var actLatitude = req.body.actLatitude;
   var actLimitNum = req.body.actLimitNum; //int
@@ -26,6 +27,7 @@ exports.publishActivity = function(req, res, next) {
         activities.actContent = actContent;
         activities.actCategory = actCategory;
         activities.actAddress = actAddress;
+        activities.actCity = actCity;
         activities.actLongitude = actLongitude;
         activities.actLatitude = actLatitude;
         activities.actLimitNum = actLimitNum;
@@ -48,10 +50,10 @@ exports.publishActivity = function(req, res, next) {
 
 //客户端需要传递参数：城市名，获得所有未过期的并正在进行中的活动，并按照最新时间排列,返回所有大于当前时间的活动     
 exports.getAllActivities = function(req, res, next){
-     var actAddress = req.params.actAddress || req.body.actAddress ||req.query.actAddress ;    
-      var fuzzyCity = new RegExp(".*" +actAddress +".*");   //根据城市名进行模糊搜索  类型为“XX城市XX”
+      var actCity = req.params.actCity || req.body.actCity ||req.query.actCity ;  
+     // var fuzzyCity = new RegExp(".*" +actCity +".*");   //根据城市名进行模糊搜索  类型为“XX城市XX”
      //复合搜索
-     Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gt('actStart', new  Date()).execFind(function(err, activities) {
+     Activity.find({actCity:actCity}).where('actStatus',1).sort('actStart',-1).gt('actStart', new  Date()).execFind(function(err, activities) {
         if (err) {
           return next(err);
           res.send(docToJson({"status":0})); 

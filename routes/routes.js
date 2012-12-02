@@ -15,14 +15,13 @@ module.exports = function (app) {
   app.get('/getUpdate',operation.getUpdate);
   app.post('/feedback',operation.feedback);
   app.get('/getRandomActivity',activity.getRandomActivity);
-  app.get('/:acUid/getInfo',operation.getInfo);
-  app.get('/getInfo',operation.getInfo);
-  app.post('/:acUid/updateInfo',operation.updateInfo);
-  app.post('/updateInfo',operation.updateInfo);
+  app.get('/:uid/getInfo',operation.getInfo);
+  app.post('/:uid/updateInfo',operation.updateInfo);
+  app.get('/:uid/getMyActivity',activity.getMyActivity);
   app.post('/updateAcStatus',activity.updateAcStatus);
   app.post('/postComments',operation.postComments);
   app.get('/:actId/getComments',operation.getComments);
-  app.get('/getComments',operation.getComments);
+  app.post('/:acUid/updateInfo',operation.updateInfo);
   app.get('/:acUid/getActivityOfJoin',activity.getActivityOfJoin);
   app.get('/getActivityOfJoin',activity.getActivityOfJoin);
   app.get('/:acUid/getActivityOfPublish',activity.getActivityOfPublish);
@@ -33,6 +32,5 @@ module.exports = function (app) {
   app.get('/getActivityByActId',activity.getActivityByActId);
   app.get('/:actId/getMembersOfThisAct',activity.getMembersOfThisAct);
   app.get('/getMembersOfThisAct',activity.getMembersOfThisAct);
-  app.post('/register', operation.register);
  
 }

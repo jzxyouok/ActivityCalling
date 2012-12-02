@@ -10,6 +10,7 @@ var activitySchema = new Schema({
 	actName : {type: String} ,               //活动名称
 	actContent : {type: String},              //活动内容
 	actAddress : {type: String},               //活动地址
+        actCity : {type: String},               //活动城市
         actLongitude:{type:Number},                //地址经度
         actLatitude:{type:Number},                //地址纬度
         actCategory : {type: Number},		         //活动分类

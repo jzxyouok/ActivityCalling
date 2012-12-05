@@ -345,8 +345,7 @@ exports.getActivityByActId = function(req, res) {
           res.send(docToJson({"status":0})); 
       }
       else{
-          res.send(docToJson(activitity));
-          return;
+            res.send(docToJson(activitity));
           }
      })    
 }

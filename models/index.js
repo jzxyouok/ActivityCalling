@@ -15,6 +15,7 @@ require('./comment');
 require('./feedback');
 require('./version');
 require('./uidActMatch');
+require('./admin'),
 
 
 exports.user = mongoose.model('user');
@@ -23,3 +24,4 @@ exports.comment = mongoose.model('comment');
 exports.feedback = mongoose.model('feedback');
 exports.version = mongoose.model('version');
 exports.uidActMatch = mongoose.model('uidActMatch');
+exports.admin = mongoose.model('admin');

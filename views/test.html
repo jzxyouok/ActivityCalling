@@ -76,60 +76,88 @@
 <input type="submit" value="submit"/>
 </form>
 <hr/>
-  提交意见测试
+
+             </br></br>
+    用户第一次认证  注册 测试 （qq、mail、phone 三个至少要一个 否侧返回 status：0）
+          <form action = '/register' method = 'post'>
+            第三方平台UID
+            <input type = 'text' name = 'thirdPlatUid' id = 'thirdPlatUid' value = '000001' >
+          </br>
+            第三方类型
+            <input type = 'text' name = 'thirdPlatType' id = 'thirdPlatType' value = 'WB'  >
+          </br>
+            性别
+            <input type = 'text' name = 'gender' id = 'gender' value = '0' ></br>
+            qq
+            <input type = 'text' name = 'qq' id = 'qq' value = '8211221212'></br>
+            mail
+            <input type = 'text' name = 'mail' id = 'mail' value = 'gumpggu@gmail.com' ></br>
+            phone
+            <input type = 'text' name = 'phone' id = 'phone' value = '18767104308' ></br>
+        <input type = 'submit' >
+      </form></br>
+
+  提交反馈意见测试
       <form action = '/feedback' method = 'post'>
         acUid：
-        <input type = 'text' name = 'acUid' id = 'acUid'>
+        <input type = 'text' name = 'acUid' id = 'acUid' value = 'WB135357536961806705' >
       </br>
       content：
-        <input type = 'text' name = 'feedContent' id = 'feedContent'>
+        <input type = 'text' name = 'feedContent' id = 'feedContent' value = '这个软件真他妈好用' >
       </br>
         <input type = 'submit' >
       </form>
     </br></br>
-    反馈某个用户信息
-    提交 wb00002 用户
-          <form action = '/wb00002/getInfo' method = 'get'>
+    查看某个用户信息
+    提交 WB135357536961806705 用户
+          <form action = '/WB135357536961806705/getInfo' method = 'get' >
       </br>
         <input type = 'submit' >
       </form>
     </br></br>
     用户对某个活动的提交的评论 测试
-          <form action = '/postComments' method = 'post'>
+          <form action = '/postComments' method = 'post'  >
             actId
-            <input type = 'text' name = 'actId' id = 'actId'></br>
+            <input type = 'text' name = 'actId' id = 'actId' value = 'ACT00001' ></br>
             acUid
-            <input type = 'text' name = 'acUid' id = 'acUid' ></br>
+            <input type = 'text' name = 'acUid' id = 'acUid' value = 'WB135357536961806705' ></br>
             comments
-            <input type = 'text' name = 'comments' id = 'comments'></br>
+            <input type = 'text' name = 'comments' id = 'comments' value = '这个活动真好玩' > </br>
       </br>
         <input type = 'submit' >
       </form>
           </br></br>
-    获取act123213活动的评论
-          <form action = '/act123213/getComments' method = 'get'>
+    获取ACT00001活动的评论
+          <form action = '/ACT00001/getComments' method = 'get'>
        </br>
         <input type = 'submit' >
       </form>
  </br></br>
-    获取软件最新的版本号
+    获取软件最新的版本号 （如果已经是最新的版本 返回 status：0）
           <form action = '/getUpdate' method = 'get'>
-            <input type = 'text' name = 'currVersion' id = 'currVersion'>
+            <input type = 'text' name = 'currVersion' id = 'currVersion' value = '0.0.1' >
       </br>
         <input type = 'submit' >
       </form>
 
 
                 </br></br>
-    更新用户wb00002的联系方式
-          <form action = '/wb00002/updateInfo' method = 'post'>
-            改变的内容
-            <input type = 'text' name = 'content' id = 'content'  >
+    更新用户WB135357536961806705的联系方式 （这个用户ID要根据下面的注册的ID而确定）
+          <form action = '/WB135357536961806705/updateInfo' method = 'post'>
+            qq
+            <input type = 'text' name = 'qq' id = 'qq' value = '8212121212' >
           </br>
-          改变的联系方式
-            <input type = 'text' name = 'contact' id = 'contact' >
+          mail
+            <input type = 'text' name = 'mail' id = 'mail' value = '123@qq.com'  >
+      </br>
+      phone
+            <input type = 'text' name = 'phone' id = 'phone' value = '12345678901'  >
       </br>
         <input type = 'submit' >
       </form>
+
+
+   
+
 </body>
 </html>

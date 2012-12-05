@@ -11,7 +11,7 @@ var userSchema = new Schema({
   thirdPlatType : {type: String},                //平台类型
   qq: {type: Number},                              //qq
   phone: {type: Number},                            //联系电话
-  mail: {type: String},                           //邮箱
+  mail: {type: String},                            //邮箱
   gender : {type: Number}                           //性别 0：男、1：女 
 });
 

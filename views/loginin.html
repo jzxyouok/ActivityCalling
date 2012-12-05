@@ -1,0 +1,137 @@
+<html>
+<head>
+      <script type="text/javascript" src="../javascripts/jquery.min.js"></script>
+      <script type="text/javascript">
+      //查看用户
+      function  showuser() {
+      	// body...
+      	$.ajax({
+		      type: "get",
+		      url: "/showuser",
+		      async: false,
+		      success: function (callbackresult) {
+		      	jQuery("#user").html(callbackresult);
+		      }
+		    });
+      }
+      //查看活动
+      function  showact() {
+      	// body...
+      	$.ajax({
+		      type: "get",
+		      url: "/showact",
+		      async: false,
+		      success: function (callbackresult) {
+		      	jQuery("#act").html(callbackresult);
+		      }
+		    });
+      }
+
+
+      //查看评论
+      function  showcomment() {
+      	// body...
+      	$.ajax({
+		      type: "get",
+		      url: "/showcomment",
+		      async: false,
+		      success: function (callbackresult) {
+		      	jQuery("#comment").html(callbackresult);
+		      }
+		    });
+      }
+      //查看反馈
+   function  showfeedback() {
+      	// body...
+      	$.ajax({
+		      type: "get",
+		      url: "/showfeedback",
+		      async: false,
+		      success: function (callbackresult) {
+		      	jQuery("#feedback").html(callbackresult);
+		      }
+		    });
+      }
+      //查看版本
+    function  showver() {
+      	// body...
+      	$.ajax({
+		      type: "get",
+		      url: "/showver",
+		      async: false,
+		      success: function (callbackresult) {
+		      	jQuery("#ver").html(callbackresult);
+		      }
+		    });
+      }
+
+      // 删除活动
+
+      function deleteact(){
+      	var actId = jQuery("#actId").val();
+      	//alert(actId);
+      	$.ajax({
+      		type : "post",
+      		url: "/deleteact",
+      		data: "actId=" + actId,
+      		async: false,
+      		success : function (callbackresult) {
+      			if (callbackresult == "1") {
+      				alert("删除成功");
+      			}else{
+      				alert("删除失败");
+      			}
+      		}
+      	})
+      }
+
+
+      </script>
+</head>
+
+<body>
+	
+	<div>
+		查看用户
+		<input type = 'submit'  onclick = 'showuser()'>
+		<span id = "user" />
+	</div>
+	</br>
+
+	<div>
+	查看活动
+		<input type = 'submit'  onclick = 'showact()'>
+		
+		<span id = "act" ></span>
+	</div>
+	</br>
+	<div>
+	查看评论
+		<input type = 'submit'  onclick = 'showcomment()'>
+		<span id = "comment" />
+	</br>
+</div>
+</br>
+<div>
+	查看反馈信息
+		<input type = 'submit'  onclick = 'showfeedback()'>
+		<span id = "feedback" />
+	</br>
+</div>
+</br>
+<div>
+	查看版本信息
+		<input type = 'submit'  onclick = 'showver()'>
+		<span id = "ver" />
+	</br>
+</div>
+</br>
+<div>
+	删除活动
+		<input type = 'text' id = 'actId' >
+		<input type = 'submit'  onclick = 'deleteact()'>
+	</br>
+</div>
+</br>
+</body>
+</html>

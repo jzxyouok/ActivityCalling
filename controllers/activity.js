@@ -6,7 +6,7 @@ var UidActMatch = models.uidActMatch;
 var User = models.user;
 
 //发布活动
-exports.publishActivity = function(req, res, next) {
+exports.publishActivity = function(req, res) {
   var actName = req.body.actName;
   var actContent = req.body.actContent;
   var actCategory = req.body.actCategory; //int类型，1:运动 2：K歌 3：桌游 4、聚餐
@@ -38,7 +38,7 @@ exports.publishActivity = function(req, res, next) {
   
   activities.save(function(err) {
       if (err) {
-       return next(err);
+       //return next(err);
        res.send(docToJson({"status":0})); 
       }
       else{
@@ -49,13 +49,13 @@ exports.publishActivity = function(req, res, next) {
 }
 
 //客户端需要传递参数：城市名，获得所有未过期的并正在进行中的活动，并按照最新时间排列,返回所有大于当前时间的活动     
-exports.getAllActivities = function(req, res, next){
+exports.getAllActivities = function(req, res){
       var actCity = req.params.actCity || req.body.actCity ||req.query.actCity ;  
      // var fuzzyCity = new RegExp(".*" +actCity +".*");   //根据城市名进行模糊搜索  类型为“XX城市XX”
      //复合搜索
      Activity.find({actCity:actCity}).where('actStatus',1).sort('actStart',-1).gt('actStart', new  Date()).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
       }
       else{
@@ -71,7 +71,7 @@ exports.joinActivity = function(req, res) {
   var actId = req.body.actId || req.query.actId || req.params.actId;   //活动Id
   UidActMatch.findOne({acUid:acUid}).where('actId',actId).exec(function(err, matches){
      if(err){
-       return next(err);
+       //return next(err);
        res.send(docToJson({"status":0})); 
        return;
      }
@@ -85,7 +85,7 @@ exports.joinActivity = function(req, res) {
       uidActMatches.actId = actId;
       uidActMatches.save(function(err) {
       if (err) {
-       return next(err);
+       //return next(err);
        res.send(docToJson({"status":0})); 
       }
       else{
@@ -104,7 +104,7 @@ exports.joinActivity = function(req, res) {
          }
          doc.save(function(err){  
             if(err) {
-              return next(err);
+              //return next(err);
               uidActMatches.remove({actId: actId});
               res.send(docToJson({"status":0})); 
             }
@@ -138,7 +138,7 @@ exports.getSpecificActivity = function(req, res) {
     console.log(1);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
            else{
@@ -151,7 +151,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(2);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).gte('actRatio',0.3).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -164,7 +164,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(3);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).lte('actEnd',actStopTime).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -177,7 +177,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(4);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).lte('actEnd',actStopTime).gte('actRatio',0.3).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -190,7 +190,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(5);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).lte('actEnd',actStopTime).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -203,7 +203,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(6);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).lte('actEnd',actStopTime).gte('actRatio',0.3).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -216,7 +216,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(7);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+         // return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -229,7 +229,7 @@ exports.getSpecificActivity = function(req, res) {
      console.log(8);
         Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).gte('actRatio',0.3).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
            }
          else{
@@ -248,7 +248,7 @@ exports.getRandomActivity = function(req, res) {
     var fuzzyCity = new RegExp(".*" +actAddress +".*"); 
     Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).gt('actStart', new  Date()).execFind(function(err, activities) {
       if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
       }
       else{
@@ -265,7 +265,7 @@ exports.getActivityOfJoin = function(req, res) {
    //根据用户ID进行搜索
    UidActMatch.find({acUid:acUid}).sort('timeOfJoin',-1).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
       }
       else if(activities){
@@ -281,7 +281,7 @@ exports.getActivityOfJoin = function(req, res) {
                 var j=0;
                 Activity.findOne({actId:actId},function(err,activity){
               if(err){
-                   return next(err);
+                  // return next(err);
                    res.send(docToJson({"status":0}));
                     }
               else if(activity){
@@ -311,7 +311,7 @@ exports.getActivityOfPublish = function(req, res) {
    //根据用户ID进行搜索
    Activity.find({acUid:acUid}).sort('actStart',-1).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+         //return next(err);
           res.send(docToJson({"status":0})); 
       }
       else{
@@ -327,7 +327,7 @@ exports.getActivityOfCate = function(req, res) {
      var fuzzyCity = new RegExp(".*" +actAddress +".*");
      Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).where('actCategory',actCategory).sort('actStart',-1).gt('actStart', new  Date()).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+          //return next(err);
           res.send(docToJson({"status":0})); 
       }
       else{
@@ -341,7 +341,7 @@ exports.getActivityByActId = function(req, res) {
      var actId = req.params.actId || req.body.actId || req.query.actId;  //根据活动ID
      Activity.find({actId:actId}).execFind(function(err, activitity) {
         if (err) {
-          return next(err);
+         // return next(err);
           res.send(docToJson({"status":0})); 
       }
       else{
@@ -356,7 +356,7 @@ exports.getMembersOfThisAct = function(req, res) {
    //根据用户ID进行搜索
    UidActMatch.find({acUid:acUid}).execFind(function(err, activities) {
         if (err) {
-          return next(err);
+        //  return next(err);
           res.send(docToJson({"status":0})); 
       }
       else if(activities){
@@ -368,7 +368,7 @@ exports.getMembersOfThisAct = function(req, res) {
                 var acUid = activities[i].acUid;
                 User.findOne({acUid:acUid},function(err,user){
               if(err){
-                   return next(err);
+               //    return next(err);
                    res.send(docToJson({"status":0}));
                     }
               else if(user){

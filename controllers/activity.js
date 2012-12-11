@@ -125,7 +125,7 @@ exports.getSpecificActivity = function(req, res) {
     //（2）根据时间,前提也是考虑了地址
     //（3）根据热门程度
     //当然这些活动都是正在进行的
-    var actStartTime = req.body.actStartTime || req.query.actStartTime ||req.params.acUid;
+    var actStartTime = req.body.actStartTime || req.query.actStartTime;
     var actStopTime = req.body.actStopTime || req.query.actStopTime;
     var actAddress = req.body.actAddress || req.query.actAddress;
     var actSearchAddress = req.body.actSearchAddress || req.query.actSearchAddress;
@@ -149,7 +149,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime!='' & actStopTime=='' & actAddress!='' & hot!=''){
      console.log(2);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).gte('actRatio',0.3).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).gte('actRatio',0.5).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -175,7 +175,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime!='' & actStopTime!='' & actAddress!='' & hot!=''){
      console.log(4);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).lte('actEnd',actStopTime).gte('actRatio',0.3).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).lte('actEnd',actStopTime).gte('actRatio',0.5).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -201,7 +201,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime=='' & actStopTime!='' & actAddress!='' & hot!=''){
      console.log(6);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).lte('actEnd',actStopTime).gte('actRatio',0.3).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).lte('actEnd',actStopTime).gte('actRatio',0.5).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -227,7 +227,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime=='' & actStopTime=='' & actAddress!='' & hot!=''){
      console.log(8);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).gte('actRatio',0.3).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).gte('actRatio',0.5).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -339,13 +339,43 @@ exports.getActivityOfCate = function(req, res) {
 //根据活动ID返回该活动的具体信息
 exports.getActivityByActId = function(req, res) { 
      var actId = req.params.actId || req.body.actId || req.query.actId;  //根据活动ID
-     Activity.find({actId:actId}).execFind(function(err, activitity) {
+     Activity.findOne({actId:actId}, function (err, activitity) {
         if (err) {
          // return next(err);
           res.send(docToJson({"status":0})); 
       }
       else{
-            res.send(docToJson(activitity));
+            User.findOne({
+              acUid: activitity.acUid
+            }, function (err, user){
+              if (err) {
+                res.send(docToJson({"status":0})); 
+              }else if ( user == null) {
+                res.send(docToJson({"status":0})); 
+              }else{
+
+                var newactivitity = {
+                    actId : activitity.actId,
+                    actName : activitity.actName,
+                    actContent : activitity.actContent,
+                    actCategory : activitity.actCategory,
+                    actAddress : activitity.actAddress,
+                    actCity : activitity.actCity,
+                    actLongitude : activitity.actLongitude,
+                    actLatitude : activitity.actLatitude,
+                    actLimitNum : activitity.actLimitNum,
+                    actStart : activitity.actStart,
+                    actEnd : activitity.actEnd,
+                    actStatus : activitity.actStatus,
+                    acUid : activitity.acUid,
+                    nickname : user.nickname
+                  };
+
+                //console.log(newactivitity);
+                res.send(docToJson(newactivitity));
+              }
+            });
+            //res.send(docToJson(activitity));
           }
      })    
 }

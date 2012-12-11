@@ -246,27 +246,41 @@ exports.register = function(req, res){
 	var qq = req.body.qq;
 	var mail = req.body.mail;
 	var phone = req.body.phone;
-
-	if (qq == '' && mail  == '' && phone == '') {
+	var nickname = req.body.nickname;
+	if (0) {
+	//if (qq == '' && mail  == '' && phone == '') {
 		res.send(docToJson({'status' : 0}));
 	} else{
-		var users = new user();
-		users.acUid = thirdPlatType + new Date().getTime() + RndNum(5) ;
-		users.thirdPlatType = thirdPlatType;
-		users.thirdPlatUid = thirdPlatUid;
-		users.gender = gender;
-		users.qq = qq;
-		users.mail = mail;
-		users.phone = phone;
+
+		user.findOne({
+			thirdPlatUid: thirdPlatUid
+		}, function (err, doc){
+			if (doc == null) {
+
+				var users = new user();
+				users.acUid = thirdPlatType + new Date().getTime() + RndNum(5) ;
+				users.thirdPlatType = thirdPlatType;
+				users.thirdPlatUid = thirdPlatUid;
+				users.gender = gender;
+				users.qq = qq;
+				users.mail = mail;
+				users.phone = phone;
+				users.nickname = nickname;
 
 
-		users.save(function (err, doc){
-			if (err) {
-				res.send(docToJson({'status' : 0}));
+				users.save(function (err, doc){
+					if (err) {
+						res.send(docToJson({'status' : 0}));
+					}else{
+						res.send(docToJson({'acUid' : doc.acUid}));
+					}
+				});
 			}else{
-				res.send(docToJson({'status' : 1}));
+				res.send(docToJson({'acUid' : doc.acUid}));
 			}
-		});
+		})
+
+
 	}
 
 }

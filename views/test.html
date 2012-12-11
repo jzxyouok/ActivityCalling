@@ -78,7 +78,7 @@
 <hr/>
 
              </br></br>
-    用户第一次认证  注册 测试 （qq、mail、phone 三个至少要一个 否侧返回 status：0）
+    用户第一次认证  注册 测试 
           <form action = '/register' method = 'post'>
             第三方平台UID
             <input type = 'text' name = 'thirdPlatUid' id = 'thirdPlatUid' value = '000001' >
@@ -94,6 +94,8 @@
             <input type = 'text' name = 'mail' id = 'mail' value = 'gumpggu@gmail.com' ></br>
             phone
             <input type = 'text' name = 'phone' id = 'phone' value = '18767104308' ></br>
+            nickname 
+            <input type = 'text' name = 'nickname' id = 'nickname' value = 'gumpg' ></br>
         <input type = 'submit' >
       </form></br>
 
@@ -133,6 +135,7 @@
         <input type = 'submit' >
       </form>
  </br></br>
+
     获取软件最新的版本号 （如果已经是最新的版本 返回 status：0）
           <form action = '/getUpdate' method = 'get'>
             <input type = 'text' name = 'currVersion' id = 'currVersion' value = '0.0.1' >
@@ -157,6 +160,16 @@
       </form>
 
 
+
+    活动详情
+          <form action = '/getActivityByActId' method = 'get'>
+            <input type = 'text' name = 'actId' id = 'actId' value = 'ACT135522970189835980' >
+      </br>
+        <input type = 'submit' >
+      </form>
+
+
+                </br></br>
    
 
 </body>

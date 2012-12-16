@@ -69,69 +69,156 @@ exports.updateInfo = function(req, res) {
 	var qq = req.body.qq;
 	var mail = req.body.mail;
 	var phone = req.body.phone;
+	var nickname = req.body.nickname;
 
-	if (qq != ''&& mail != '' && phone != '') {
+	if (qq != null&& mail != null && phone != null && nickname != null) { //1
+		//res.send(docToJson({'qq': qq, 'mail' : mail , 'phone': phone, 'nickname': nickname}));
 		user.update({
 			acUid: acUid
 		},{
 			phone: phone,
 			mail:mail,
-			qq:qq
+			qq: qq,
+			nickname: nickname
 		},{
 			multi: false
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				//res.send(err);
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else if ( qq != '' &&mail != '' ) {
+	}else if ( qq != null &&mail != null &&nickname != null) {//2
 		user.update({
 			acUid: acUid
 		},{
 			qq: qq,
-			mail:mail
+			mail:mail,
+			nickname: nickname
 		},{
 			multi: false
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				//res.send("222222");
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else if (qq != '' && phone != '') {
+	}else if (qq != null && phone != null &&nickname != null) {//3
 		user.update({
 			acUid: acUid
 		},{
 			phone: phone,
-			qq: qq
+			qq: qq,
+			nickname: nickname
 		},{
 			multi: false
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				//res.send("33333");
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else if (phone != '' && mail != '') {
+	}else if (phone != null && mail != null && nickname != null) {//4
 		user.update({
 			acUid: acUid
 		},{
 			phone: phone,
+			mail: mail,
+			nickname: nickname
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("44444444");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else if (phone != null && nickname!= null) { //5
+		user.update({
+			acUid: acUid
+		},{
+			phone: phone,
+			nickname: nickname
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("5555555");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else if (mail != null && nickname != null) {//6
+		user.update({
+			acUid: acUid
+		},{
 			mail: mail
 		},{
 			multi: false
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				//res.send("666666");
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else if (phone != '') {
+	}else if (qq != null && nickname!= null) {//7
+		user.update({
+			acUid: acUid
+		},{
+			qq: qq,
+			nickname: nickname
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("7777777");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else if (qq != null) {//8
+		user.update({
+			acUid: acUid
+		},{
+			qq: qq
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("88888888");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else if (mail != null) {//9
+		user.update({
+			acUid: acUid
+		},{
+			mail: mail
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("9999999");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else if (phone != null) {//10
 		user.update({
 			acUid: acUid
 		},{
@@ -141,40 +228,95 @@ exports.updateInfo = function(req, res) {
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				//res.send("aaaaaaa");
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else if (mail != '') {
+	}else  if (nickname!= null) {//11
 		user.update({
 			acUid: acUid
 		},{
+			nickname: nickname
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("bbbbbbb");
+
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else  if (qq!= null && mail != null) {//12
+		user.update({
+			acUid: acUid
+		},{
+			qq: qq,
 			mail: mail
 		},{
 			multi: false
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				///res.send("cccccc");
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else if (qq != '') {
+	}else  if (qq!= null && phone != null) {//13
 		user.update({
 			acUid: acUid
 		},{
-			qq: qq
+			qq: qq,
+			phone: phone
 		},{
 			multi: false
 		},function(err, num){
 			if (err) {
 				res.send(docToJson({'status': 0}));
+				//res.send("dddddddd");
 			}else{
 				res.send(docToJson({'status': 1}));
 			}
 		});
-	}else {
+	}else  if (phone!= null && mail != null) {//14
+		user.update({
+			acUid: acUid
+		},{
+			qq: qq,
+			phone: phone
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("eeeeeeee");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else  if (qq!= null && mail != null && phone!=null) {//15
+		user.update({
+			acUid: acUid
+		},{
+			qq: qq,
+			mail: mail,
+			phone: phone
+		},{
+			multi: false
+		},function(err, num){
+			if (err) {
+				res.send(docToJson({'status': 0}));
+				//res.send("ffffffff");
+			}else{
+				res.send(docToJson({'status': 1}));
+			}
+		});
+	}else{
 		res.send(docToJson({'status': 0}));
+		//res.send("ggggggg");
 	}
 }
 
@@ -227,12 +369,61 @@ exports.getComments = function(req, res) {
 	var actId = req.params.actId;
 	comment.find({
 		actId: actId
-	}, function(err, doc){
-		console.log(doc);
+	}, function(err, comments){
+		//console.log(comments);
 		if (err) {
 			res.send(docToJson({'status': 0}));
+		}else if (comments.length != 0) {
+
+			comlen = comments.length;
+
+			function getherAllComacUid (commentlength , sendCom){
+				
+				var newdoc = new Array();
+				var time = new Array();
+				for (var i = commentlength-1; i >= 0; i--) {
+					time.push(i);
+				};
+				for (var i = 0; i < commentlength; i++) {
+					var acUid = comments[i].acUid;
+					user.findOne({
+						acUid : acUid
+					}, function (err, doc){
+						if (err) {
+							res.send(docToJson({'status': 0}));
+						}else if ( doc != null ){
+							var i = time.pop();
+							if (doc.nickname == null) {
+								var nickname = "";
+							}else{
+								var nickname = doc.nickname;
+							}
+							var middoc = {
+								actId : comments[i].actId,
+								acUid : comments[i].acUid,
+								content : comments[i].content,
+								commentId : comments[i].commentId,
+								timeOfCom : comments[i].timeOfCom,
+								nickname : nickname
+							};
+							console.log(middoc);
+							newdoc.push(middoc);
+							if ( commentlength ==  newdoc.length) {
+								res.send(docToJson(newdoc));
+							};
+						}else{
+							res.send(docToJson({'status': 0}));
+						}
+					});
+				};
+			}
+
+			getherAllComacUid(comlen, function (doc){
+				res.send(docToJson(doc));
+			});
+
 		}else{
-			res.send(docToJson(doc));
+			res.send(docToJson({'status': 0}));
 		}
 	})
 }
@@ -247,6 +438,11 @@ exports.register = function(req, res){
 	var mail = req.body.mail;
 	var phone = req.body.phone;
 	var nickname = req.body.nickname;
+	console.log(gender);
+	console.log(qq);
+	console.log(mail);
+	console.log(phone);
+	console.log("1111");
 	if (0) {
 	//if (qq == '' && mail  == '' && phone == '') {
 		res.send(docToJson({'status' : 0}));

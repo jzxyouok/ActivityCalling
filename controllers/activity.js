@@ -149,7 +149,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime!='' & actStopTime=='' & actAddress!='' & hot!=''){
      console.log(2);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).gte('actRatio',0.5).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).sort('actRatio',-1).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -175,7 +175,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime!='' & actStopTime!='' & actAddress!='' & hot!=''){
      console.log(4);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).lte('actEnd',actStopTime).gte('actRatio',0.5).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', actStartTime).lte('actEnd',actStopTime).sort('actRatio',-1).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -201,7 +201,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime=='' & actStopTime!='' & actAddress!='' & hot!=''){
      console.log(6);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).lte('actEnd',actStopTime).gte('actRatio',0.5).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).lte('actEnd',actStopTime).sort('actRatio',-1).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -227,7 +227,7 @@ exports.getSpecificActivity = function(req, res) {
     }
     else if(actStartTime=='' & actStopTime=='' & actAddress!='' & hot!=''){
      console.log(8);
-        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).gte('actRatio',0.5).execFind(function(err, activities) {
+        Activity.find({actAddress:{'$all':[fuzzyCity]}}).where('actStatus',1).sort('actStart',-1).gte('actStart', new Date()).sort('actRatio',-1).execFind(function(err, activities) {
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
@@ -264,12 +264,14 @@ exports.getActivityOfJoin = function(req, res) {
    var acUid = req.params.acUid || req.body.acUid || req.query.acUid; 
    //根据用户ID进行搜索
    UidActMatch.find({acUid:acUid}).sort('timeOfJoin',-1).execFind(function(err, activities) {
+    console.log(activities);
         if (err) {
           //return next(err);
           res.send(docToJson({"status":0})); 
       }
-      else if(activities){
+      else if(activities.length != 0){
          var actLen = activities.length;
+         console.log(actLen);
           function getherAllActsInfo(activityLen,sendActs){
              var i=0;
              var acts = new Array();
@@ -280,11 +282,14 @@ exports.getActivityOfJoin = function(req, res) {
                 jointime.push(timeofjoin);
                 var j=0;
                 Activity.findOne({actId:actId},function(err,activity){
+                  console.log(activity);
               if(err){
+               // console.log("activity");
                   // return next(err);
                    res.send(docToJson({"status":0}));
                     }
-              else if(activity){
+              else if(activity != null){
+                //console.log("activity");
                    var tj = jointime.pop(j++);
                    activity.timeOfJoin = tj;
                    acts.push(activity);
@@ -294,13 +299,18 @@ exports.getActivityOfJoin = function(req, res) {
                      j=0;
                      jointime.length = 0;
                    }
-               }
+               }else{
+                    //console.log("activity");
+                    res.send(docToJson({"status":0}));
+                   }
              })
            }
          }
            getherAllActsInfo(actLen,function(acts){
             res.send(docToJson(acts));
           })
+     }else{
+      res.send(docToJson({"status":0}));
      }
     })
 }

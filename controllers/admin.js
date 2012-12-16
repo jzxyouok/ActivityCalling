@@ -8,7 +8,7 @@ var version = models.version;
 var user = models.user;
 var comment = models.comment;
 var activity = models.activity; 
-
+var uidActMatch = models.uidActMatch;
 
 exports.admin = function(req, res){
      res.render('admin',{
@@ -120,6 +120,41 @@ exports.deleteact =function (req, res){
 		}
 	});
 }
+
+
+exports.deletemat =function (req, res){
+	uidActMatch.findOne({
+
+	}, function (err, doc){
+		console.log(doc)
+		if (err) {
+			res.send("0");
+		}else{
+			if (doc == null) {
+				res.send("0");
+			}else{
+				doc.remove(function (err, doc1){
+					if (err) {
+						res.send("0");
+					}else{
+						res.send("1");
+					}
+				});
+				console.log(doc);
+			}
+		}
+	});
+}
+
+exports.showmat = function (req, res) {
+	console.log("ok6");
+	uidActMatch.find({
+	}, function (err, doc){
+		res.send(docToJson(doc));
+	});
+}
+
+
 
 //md5 加密
 function md5(str) {

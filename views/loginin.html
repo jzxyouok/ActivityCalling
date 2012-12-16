@@ -85,6 +85,41 @@
       	})
       }
 
+ 	//查看匹配表
+
+ 	function showmat(){
+
+
+ 		      	$.ajax({
+		      type: "get",
+		      url: "/showmat",
+		      async: false,
+		      success: function (callbackresult) {
+		      	jQuery("#mat").html(callbackresult);
+		      }
+		    });
+
+ 	}
+
+ 	//删除匹配表
+
+ 	function deletemat(){
+
+      	$.ajax({
+      		type : "post",
+      		url: "/deletemat",
+      		async: false,
+      		success : function (callbackresult) {
+      			if (callbackresult == "1") {
+      				alert("删除成功");
+      			}else{
+      				alert("删除失败");
+      			}
+      		}
+      	})
+
+ 	}
+
 
       </script>
 </head>
@@ -127,9 +162,21 @@
 </div>
 </br>
 <div>
+	查看匹配表
+		<input type = 'submit'  onclick = 'showmat()'>
+		<span id = "mat" />
+	</br>
+</div>
+</br>
+<div>
 	删除活动
 		<input type = 'text' id = 'actId' >
 		<input type = 'submit'  onclick = 'deleteact()'>
+	</br>
+</div>
+<div>
+	删除匹配表
+		<input type = 'submit'  onclick = 'deletemat()'>
 	</br>
 </div>
 </br>

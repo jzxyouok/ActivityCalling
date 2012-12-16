@@ -48,6 +48,8 @@ module.exports = function (app) {
   app.get('/showcomment',admin.showcomment);
   app.get('/showfeedback',admin.showfeedback);
   app.get('/showver',admin.showver);
+  app.get('/showmat', admin.showmat);
   app.post('/deleteact' ,admin.deleteact);
+  app.post('/deletemat', admin.deletemat);
  
 }

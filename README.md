@@ -10,3 +10,11 @@ app开发目的：2012年9月，参加移动互联网应用创新大赛。
 
 前后端开发：服务器端为nodejs，部署在cloudfoundry，客户端为安卓。
 该应用开发历时2两月，由于每个人都比较忙，因此只能抽取周末时间进行开发。另外，四个成员分处不同地区，因此采用github协同开发，保证了项目的顺利实施。
+
+客户端界面：
+![1](https://github.com/michaelice/ACapp/master/images/1.jpg)
+![2](https://github.com/michaelice/ACapp/master/images/2.jpg)
+![3](https://github.com/michaelice/ACapp/master/images/3.jpg)
+![4](https://github.com/michaelice/ACapp/master/images/4.jpg)
+![5](https://github.com/michaelice/ACapp/master/images/5.jpg)
+![6](https://github.com/michaelice/ACapp/master/images/6.png)
